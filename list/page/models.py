@@ -22,28 +22,27 @@ class Employee(models.Model):
     def __str__(self):
         return self.name
 
-    def get_hierarchy(self):
-        if self.subordinates.all():
-            name = self.name
-            email = self.email
-            hire_date = self.hire_date
-            position = self.position
-            manager = self.manager
-            subordinates = []
-
-            for subordinate in self.subordinates.all():
-                subordinates.append(subordinate.get_hierarchy())
-
-
-            hierarchy = {'name': name, 'email': email, 'hire_date': hire_date, 'position': position,
-                         'manager': manager, 'subordinates': subordinates}
-
-        else:
-            hierarchy = {
-                'name': self.name,
-                'email': self.email,
-                'hire_date': self.hire_date,
-                'position': self.position,
-                'manager': self.manager,
-            }
-        return hierarchy
+    # def get_hierarchy(self):
+    #     if self.subordinates.all():
+    #         name = self.name
+    #         email = self.email
+    #         hire_date = self.hire_date
+    #         position = self.position
+    #         parent = self.parent
+    #         subordinates = []
+    #
+    #         for subordinate in self.subordinates.all():
+    #             subordinates.append(subordinate.get_hierarchy())
+    #
+    #         hierarchy = {'name': name, 'email': email, 'hire_date': hire_date, 'position': position,
+    #                      'manager': parent, 'subordinates': subordinates}
+    #
+    #     else:
+    #         hierarchy = {
+    #             'name': self.name,
+    #             'email': self.email,
+    #             'hire_date': self.hire_date,
+    #             'position': self.position,
+    #             'parent': self.parent,
+    #         }
+    #     return hierarchy

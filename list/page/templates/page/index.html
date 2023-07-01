@@ -2,10 +2,107 @@
 
 {% block content %}
 <p class="h1">Hierarchy of workers</p>
-
+<!-- 
 <ul class="list-group">
     {% for employee in employees %}
         <li class="list-group-item">{{ employee.name }} - {{ employee.position }}</li>
+
+            {% if employee.subordinates.all %}
+            <div class="dropdown">
+                {% for sub_1 in employee.subordinates.all %}
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <p>{{ sub_1.name }} - <span>{{ sub_1.position }}</span></p> 
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">{{ sub_1.email }}</a></li>
+                    <li><a class="dropdown-item" href="#">{{ sub_1.hire_date }}</a></li>
+                </ul>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+
+
+       
+
     {% endfor %}
+</ul> -->
+
+
+<ul>
+{% for employee in employees %}
+<a class="list-group-item list-group-item-danger dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ employee.name }} - {{ employee.position }}</a>
+ <ul class="dropdown-menu">
+<li><a class="dropdown-item" href="#">Manager: {{ employee.parent }}</a></li>
+<li><a class="dropdown-item" href="#">{{ employee.email }}</a></li>
+<li><a class="dropdown-item" href="#">Hiring date: {{ employee.hire_date }}</a></li>
 </ul>
+
+
+    {% if employee.subordinates.all %}
+    <ul>
+    {% for sub_1 in employee.subordinates.all %}
+    <a class="list-group-item list-group-item-warning dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ sub_1.name }} - {{ sub_1.position }}</a>
+     <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Manager: {{ sub_1.parent }}</a></li>
+    <li><a class="dropdown-item" href="#">{{ sub_1.email }}</a></li>
+    <li><a class="dropdown-item" href="#">Hiring date: {{ sub_1.hire_date }}</a></li>
+    </ul>  
+
+
+        {% if sub_1.subordinates.all %}
+        <ul class="">
+        {% for sub_2 in sub_1.subordinates.all %}
+        <a class="list-group-item list-group-item-info dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ sub_2.name }} - {{ sub_2.position }}</a>
+        <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Manager: {{ sub_2.parent }}</a></li>
+        <li><a class="dropdown-item" href="#">{{ sub_2.email }}</a></li>
+        <li><a class="dropdown-item" href="#">Hiring date: {{ sub_2.hire_date }}</a></li>
+        </ul> 
+            {% if sub_2.subordinates.all %}
+            <ul class="">
+            {% for sub_3 in sub_2.subordinates.all %}
+                <a class="list-group-item list-group-item-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ sub_3.name }} - {{ sub_3.position }}</a>
+
+                {% if sub_3.subordinates.all %}
+                <ul class="">
+                {% for sub_4 in sub_3.subordinates.all %}
+                <a class="list-group-item list-group-item-primary dropdown-toggle" href="#" role="button" data-bs-toggle="     dropdown" aria-expanded="false">{{ sub_4.name }} - {{ sub_4.position }}</a>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Manager: {{ sub_4.parent }}</a></li>
+                <li><a class="dropdown-item" href="#">{{ sub_4.email }}</a></li>
+                <li><a class="dropdown-item" href="#">Hiring date: {{ sub_4.hire_date }}</a></li>
+                </ul> 
+                    {% if sub_4.subordinates.all %}
+                    <ul class="">
+                    {% for sub_5 in sub_4.subordinates.all %}
+                    <a class="list-group-item list-group-item-light dropdown-toggle" href="#" role="button" data-bs-toggle="     dropdown" aria-expanded="false">{{ sub_5.name }} - {{ sub_5.position }}</a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Manager: {{ sub_5.parent }}</a></li>
+                    <li><a class="dropdown-item" href="#">{{ sub_5.email }}</a></li>
+                    <li><a class="dropdown-item" href="#">Hiring date: {{ sub_5.hire_date }}</a></li>
+                    </ul>  
+                    {% endfor %}
+                    </ul>
+                    {% endif %} 
+                {% endfor %}
+                </ul>
+                {% endif %} 
+
+            {% endfor %}
+            </ul>
+            {% endif %} 
+        {% endfor %}
+        </ul>
+        {% endif %} 
+
+    </li>
+    {% endfor %}
+    </ol>
+    {% endif %}
+{% endfor %}
+</ul>
+
+
+
 {% endblock %}
