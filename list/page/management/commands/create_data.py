@@ -28,7 +28,7 @@ def create_ceo():
 
 
 def create_employees():
-    seeder.add_entity(Employee, 20, {
+    seeder.add_entity(Employee, 3, {
         'name': lambda x: seeder.faker.name(),
         'email': lambda x: seeder.faker.email(),
         'position': lambda x: seeder.faker.job(),

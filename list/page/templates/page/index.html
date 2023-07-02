@@ -67,7 +67,7 @@
                 {% if sub_3.subordinates.all %}
                 <ul class="">
                 {% for sub_4 in sub_3.subordinates.all %}
-                <a class="list-group-item list-group-item-primary dropdown-toggle" href="#" role="button" data-bs-toggle="     dropdown" aria-expanded="false">{{ sub_4.name }} - {{ sub_4.position }}</a>
+                <a class="list-group-item list-group-item-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ sub_4.name }} - {{ sub_4.position }}</a>
                 <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Manager: {{ sub_4.parent }}</a></li>
                 <li><a class="dropdown-item" href="#">{{ sub_4.email }}</a></li>
@@ -76,12 +76,24 @@
                     {% if sub_4.subordinates.all %}
                     <ul class="">
                     {% for sub_5 in sub_4.subordinates.all %}
-                    <a class="list-group-item list-group-item-light dropdown-toggle" href="#" role="button" data-bs-toggle="     dropdown" aria-expanded="false">{{ sub_5.name }} - {{ sub_5.position }}</a>
+                    <a class="list-group-item list-group-item-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ sub_5.name }} - {{ sub_5.position }}</a>
                     <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Manager: {{ sub_5.parent }}</a></li>
                     <li><a class="dropdown-item" href="#">{{ sub_5.email }}</a></li>
                     <li><a class="dropdown-item" href="#">Hiring date: {{ sub_5.hire_date }}</a></li>
                     </ul>  
+                        {% if sub_5.subordinates.all %}
+                        <ul class="">
+                        {% for sub_6 in sub_5.subordinates.all %}
+                        <a class="list-group-item list-group-item-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ sub_6.name }} - {{ sub_6.position }}</a>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Manager: {{ sub_6.parent }}</a></li>
+                        <li><a class="dropdown-item" href="#">{{ sub_6.email }}</a></li>
+                        <li><a class="dropdown-item" href="#">Hiring date: {{ sub_6.hire_date }}</a></li>
+                        </ul>  
+                        {% endfor %}
+                        </ul>
+                        {% endif %} 
                     {% endfor %}
                     </ul>
                     {% endif %} 
@@ -98,7 +110,6 @@
 
     </li>
     {% endfor %}
-    </ol>
     {% endif %}
 {% endfor %}
 </ul>
