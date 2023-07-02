@@ -8,7 +8,7 @@
     <p class="h1">Hierarchy of workers</p>
 </center>
 
-<ul>
+<ul class="list-group m-2">
 {% for employee in employees %}
 <a class="list-group-item list-group-item-danger dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ employee.name }} - {{ employee.position }}</a>
  <ul class="dropdown-menu">
@@ -55,7 +55,7 @@
                     {% if sub_4.subordinates.all %}
                     <ul class="">
                     {% for sub_5 in sub_4.subordinates.all %}
-                    <a class="list-group-item list-group-item-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ sub_5.name }} - {{ sub_5.position }}</a>
+                    <a class="list-group-item list-group-item-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ sub_5.name }} - {{ sub_5.position }}</a>
                     <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Manager: {{ sub_5.parent }}</a></li>
                     <li><a class="dropdown-item" href="#">{{ sub_5.email }}</a></li>
@@ -64,7 +64,7 @@
                         {% if sub_5.subordinates.all %}
                         <ul class="">
                         {% for sub_6 in sub_5.subordinates.all %}
-                        <a class="list-group-item list-group-item-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ sub_6.name }} - {{ sub_6.position }}</a>
+                        <a class="list-group-item list-group-item-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ sub_6.name }} - {{ sub_6.position }}</a>
                         <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Manager: {{ sub_6.parent }}</a></li>
                         <li><a class="dropdown-item" href="#">{{ sub_6.email }}</a></li>
@@ -92,7 +92,7 @@
     {% endif %}
 {% endfor %}
 </ul>
-
+</ul>
 
 
 {% endblock %}

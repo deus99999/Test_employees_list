@@ -42,20 +42,6 @@ def index(request):
     return render(request, "page/index.html", {'employees': employees})
 
 
-# def search(request):
-#     query_string = request.GET.get('q') # get string of search of GET
-#
-#     if query_string:
-#
-#         results = Employee.objects.filter(name=query_string)
-#         print(results)
-#
-#     else:
-#         results = Employee.objects.all()
-#
-#     return render(request, 'page/search.html', {'results': results, 'query_string': query_string})
-
-
 class SearchResultView(View):
     def get(self, request, *args, **kwargs):
         query = self.request.GET.get('q')

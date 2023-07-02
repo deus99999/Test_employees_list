@@ -1,0 +1,26 @@
+{% extends 'page/base.html' %}
+{% block title%}<title>Search</title>{% endblock %}
+
+{% block content %}
+<center>
+    <p class="h1">Search</p>
+</center>
+
+<ul>
+{% if results %}
+    {% for employee in results %}
+        <a class="list-group-item list-group-item-danger dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ employee.name }} - {{ employee.position }}</a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Manager: {{ employee.parent }}</a></li>
+            <li><a class="dropdown-item" href="#">{{ employee.email }}</a></li>
+            <li><a class="dropdown-item" href="#">Hiring date: {{ employee.hire_date }}</a></li>
+        </ul>
+    {% endfor %}
+</ul>           
+{% else %}
+        <p class="h1">Search without results</p>
+{% endif %}
+
+
+
+{% endblock %}
