@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from .models import Employee
+import re
+from django.views.generic import View
+from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -28,10 +32,8 @@ def index(request):
 
     # function that compare two lists and return list of needed employees
     def compare(*args):
-        employees_res = []
-        for e in employees:
-            if e not in clear_employers():
-                employees_res.append(e)
+        employees_res = [e for e in employees if e not in clear_employers()]
+
         return employees_res
 
     employees = compare(employees, clear_employers())
@@ -40,14 +42,32 @@ def index(request):
     return render(request, "page/index.html", {'employees': employees})
 
 
-def search(request):
-    query_string = request.GET.get('q') # get string of search of GET
+# def search(request):
+#     query_string = request.GET.get('q') # get string of search of GET
+#
+#     if query_string:
+#
+#         results = Employee.objects.filter(name=query_string)
+#         print(results)
+#
+#     else:
+#         results = Employee.objects.all()
+#
+#     return render(request, 'page/search.html', {'results': results, 'query_string': query_string})
 
-    if query_string:
-        results = Employee.objects.filter(name=query_string)
-        print(results)
 
-    else:
-        results = Employee.objects.all()
-
-    return render(request, 'page/search.html', {'results': results, 'query_string': query_string})
+class SearchResultView(View):
+    def get(self, request, *args, **kwargs):
+        query = self.request.GET.get('q')
+        results = ""
+        if query:
+            results = Employee.objects.filter(
+                Q(name__icontains=query) | Q(position__icontains=query)
+            )
+        paginator = Paginator(results, 6)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'page/search.html', context={
+            'results': page_obj,
+            'count': paginator.count
+        })

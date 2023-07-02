@@ -7,32 +7,6 @@
 <center>
     <p class="h1">Hierarchy of workers</p>
 </center>
-<!-- 
-<ul class="list-group">
-    {% for employee in employees %}
-        <li class="list-group-item">{{ employee.name }} - {{ employee.position }}</li>
-
-            {% if employee.subordinates.all %}
-            <div class="dropdown">
-                {% for sub_1 in employee.subordinates.all %}
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <p>{{ sub_1.name }} - <span>{{ sub_1.position }}</span></p> 
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">{{ sub_1.email }}</a></li>
-                    <li><a class="dropdown-item" href="#">{{ sub_1.hire_date }}</a></li>
-                </ul>
-                {% endfor %}
-            </div>
-            {% endif %}
-
-
-
-       
-
-    {% endfor %}
-</ul> -->
-
 
 <ul>
 {% for employee in employees %}
